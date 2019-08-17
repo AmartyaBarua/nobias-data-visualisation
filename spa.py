@@ -23,6 +23,7 @@ def getUserID(dataframe):
 #find all the news article the user was exposed to and then count the number of
 #articles from liberal and conservative media
 def getInfluence(dataframe):
+#    unwrap the links and title of each site and sort by search query and timestamp
     column_to_explode = 'searchResults'
     if 'timestamp' in dataframe.columns:
         res1 = (dataframe[column_to_explode].apply(pd.Series).merge(dataframe,right_index=True,left_index=True).drop([column_to_explode],axis=1).melt(id_vars=['searchQueryPageNum','searchQueryString','timestamp'],value_name="site").drop("variable",axis=1).dropna())
